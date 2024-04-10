@@ -59,7 +59,7 @@ locals {
       Effect = "Allow",
       Action = ["s3:ListBucket", "s3:GetBucketLocation"],
       Resource = [
-          "${module.s3-tempo.bucket-arn}"
+          "${module.s3-loki.bucket-arn}"
           ],
     },
     {

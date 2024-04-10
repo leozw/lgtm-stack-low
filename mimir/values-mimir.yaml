@@ -439,6 +439,8 @@ mimir:
         backend: s3
         s3:
           endpoint: "s3.amazonaws.com"
+          bucket_name: "eks-lgtm-mimir-bucket"
+          region: "us-east-1"
           # access_key_id: "${AWS_SECRET_ACCESS_KEY}" # This is a secret injected via an environment variable && should be used if you do not have a service account
           # secret_access_key: "${AWS_ACCESS_KEY_ID}" # This is a secret injected via an environment variable && should be used if you do not have a service account
           http:

@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "this" {
-  bucket        = var.name_bucket
+  bucket_prefix = var.name_bucket
   force_destroy = var.force_destroy
 
   tags = merge(

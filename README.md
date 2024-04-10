@@ -31,6 +31,17 @@ Cada componente é imprescindível, e a colaboração entre eles é o que possib
 - **Helmfile**
 - **Terraform**
 
+**helmfile**
+
+```bash
+curl -sL https://github.com/helmfile/helmfile/releases/download/v0.157.0/helmfile_0.157.0_linux_amd64.tar.gz | sudo tar -xz -C /usr/local/bin
+```
+**helm**
+
+```bash
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+```
+
 ---
 
 ## **📋 Pré-Requisitos**
@@ -48,8 +59,23 @@ Antes de prosseguir com a implantação da GTM Stack via Helmfile, é essencial 
 
 1. **Provedor AWS**:
 Defina o **`provider`** para especificar o perfil e a região da AWS.
+
+```hcl
+provider "aws" {
+  profile = ""
+  region  = ""
+}
+```
+
 2. **EKS Cluster**:
 Utilize **`data`** para recuperar informações do seu cluster EKS existente.
+
+```hcl
+data "aws_eks_cluster" "this" {
+  name = ""
+}
+```
+
 3. **Buckets S3**:
     - **`module "s3-tempo"`, `module "s3-loki"`** e **** **`module "s3-mimir"`** criam buckets S3 para armazenar dados do Tempo, Loki e Mimir, respectivamente.
 4. **Roles OIDC e Políticas IAM**:
@@ -59,7 +85,7 @@ Utilize **`data`** para recuperar informações do seu cluster EKS existente.
 
 Para ambientes de produção, é recomendado configurar o Terraform para usar um bucket S3 como backend, adicionando o seguinte bloco no arquivo **`versions.tf`**:
 
-```yaml
+```hcl
 terraform {
   backend "s3" {
     bucket  = "SEU_BUCKET"
@@ -71,6 +97,12 @@ terraform {
 ```
 
 ## **Aplicando o Terraform**
+
+- Navegue até o diretório **iam-oidc-terraform-aws**:
+
+   ```bash
+   cd iam-oidc-terraform-aws/
+   ```
 
 - Inicialize o Terraform:
     
@@ -130,7 +162,7 @@ Para ambientes de teste ou desenvolvimento, recomenda-se utilizar as configuraç
 1. Clone o repositório:
     
     ```bash
-    git clone git@github.com:leozw/lgtm.git
+    git clone git@github.com:leozw/lgtm-stack-low.git
     ```
     
 2. Navegue até o diretório e execute:

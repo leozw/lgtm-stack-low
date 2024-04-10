@@ -1,13 +1,13 @@
-output "iam-mimir-arn" {
-  value = module.iam-mimir.arn
+output "iam_mimir_arn" {
+  value = module.iam-mimir.arn[0]
 }
 
-output "iam-tempo-arn" {
-  value = module.iam-tempo.arn
+output "iam_tempo_arn" {
+  value = module.iam-tempo.arn[0]
 }
 
-output "iam-loki-arn" {
-  value = module.iam-loki.arn
+output "iam_loki_arn" {
+  value = module.iam-loki.arn[0]
 }
 
 output "s3_bucket_name_loki" {

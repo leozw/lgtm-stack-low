@@ -20,14 +20,18 @@ releases:
     values:
       - ./loki/values-loki.yaml
     set:
-      - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
-        value: ""
-      - name: storageConfig.aws.s3
-        value: ""
-      - name: storageConfig.aws.region
-        value: us-east-1
-      - name: storageConfig.aws.bucketnames
-        value: eks-lgtm-loki-leoz
+     - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
+       value: "arn:aws:iam::123456789012:role/loki-prd"  
+     - name: storageConfig.aws.s3
+       value: 's3://us-east-1/eks-lgtm-loki-20240410152825847700000002'
+     - name: storageConfig.aws.region
+       value: us-east-1
+     - name: storageConfig.aws.s3forcepathstyle
+       value: "true"
+     - name: storageConfig.aws.endpoint
+       value: "s3.amazonaws.com"  
+     - name: storageConfig.aws.bucketnames
+       value: eks-lgtm-loki-20240410152825847700000002
 
   - name: mimir
     namespace: lgtm
@@ -37,15 +41,23 @@ releases:
       - ./mimir/values-mimir.yaml
     set:
       - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
-        value: ""
-      - name: structuredConfig.ruler_storage.s3.bucket_name
-        value: eks-lgtm-mimir-leoz
-      - name: structuredConfig.ruler_storage.s3.region
+        value: "arn:aws:iam::123456789012:role/mimir-prd"
+      - name: mimir.structuredConfig.common.storage.backend
+        value: s3 
+      - name: mimir.structuredConfig.common.storage.s3.endpoint
+        value: "s3.amazonaws.com"
+      - name: mimir.structuredConfig.ruler_storage.s3.bucket_name
+        value: eks-lgtm-mimir-20240410152825850500000003
+      - name: mimir.structuredConfig.ruler_storage.s3.region
         value: us-east-1
-      - name: structuredConfig.blocks_storage.s3.bucket_name
-        value: eks-lgtm-mimir-ruler-bucket-leoz
-      - name: structuredConfig.blocks_storage.s3.region
+      - name: mimir.structuredConfig.ruler_storage.s3.endpoint
+        value: "s3.amazonaws.com"
+      - name: mimir.structuredConfig.blocks_storage.s3.bucket_name
+        value: eks-lgtm-mimir-ruler-bucket-20240410152825851100000004
+      - name: mimir.structuredConfig.blocks_storage.s3.region
         value: us-east-1
+      - name: mimir.structuredConfig.blocks_storage.s3.endpoint
+        value: "s3.amazonaws.com"  
 
 
   - name: prometheus
@@ -69,9 +81,11 @@ releases:
     values:
       - ./tempo/values-tempo.yaml
     set:
-      - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
-        value: ""
-      - name: storage.trace.s3.bucket
-        value: eks-lgtm-tempo-leoz
-      - name: storage.admin.s3.bucket
-        value: ""
+    - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
+      value: "arn:aws:iam::123456789012:role/tempo-prd"
+    - name: storage.trace.s3.bucket
+      value: eks-lgtm-tempo-20240410152825846300000001
+    - name: storage.trace.s3.region
+      value: us-east-1  
+    - name: storage.admin.s3.bucket
+      value: eks-lgtm-tempo-20240410152825846300000001

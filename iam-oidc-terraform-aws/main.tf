@@ -17,28 +17,28 @@ data "aws_region" "current" {}
 module "s3-loki" {
   source = "./modules/s3"
 
-  name_bucket = "eks-lgtm-loki"
+  name_bucket = "eks-lgtm-loki-"
   environment = local.environment
 }
 
 module "s3-tempo" {
   source = "./modules/s3"
 
-  name_bucket = "eks-lgtm-tempo"
+  name_bucket = "eks-lgtm-tempo-"
   environment = local.environment
 }
 
 module "s3-mimir" {
   source = "./modules/s3"
 
-  name_bucket = "eks-lgtm-mimir"
+  name_bucket = "eks-lgtm-mimir-"
   environment = local.environment
 }
 
 module "s3-mimir-ruler" {
   source = "./modules/s3"
 
-  name_bucket = "eks-lgtm-mimir-ruler-bucket"
+  name_bucket = "eks-lgtm-mimir-ruler-bucket-"
   environment = local.environment
 }
 
