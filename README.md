@@ -20,7 +20,7 @@ A stack LGTM com Prometheus foi meticulosamente projetada para oferecer um siste
 
 Cada componente é imprescindível, e a colaboração entre eles é o que possibilita uma visão holística e aprofundada do ambiente, o que é crucial para um monitoramento eficiente, resolução de problemas ágil e aprimoramento contínuo do desempenho.
 
-![arc-lgtm-2.png](https://cdn.discordapp.com/attachments/874697345898520596/1203016596675764255/arc-lgtm-2.png?ex=65cf8f83&is=65bd1a83&hm=d31b6c31ab9f68621e74c4a1ee092f25f7c982c9e0e3d41c9d31929dc87e827d&)
+![arc-lgtm-2.png]([https://cdn.discordapp.com/attachments/874697345898520596/1203016596675764255/arc-lgtm-2.png?ex=65cf8f83&is=65bd1a83&hm=d31b6c31ab9f68621e74c4a1ee092f25f7c982c9e0e3d41c9d31929dc87e827d&](https://file.notion.so/f/f/e299bee0-fe31-4ded-b642-8a492100aed7/2fa6e5c1-6f6a-49f0-9493-110d4c3f9981/arc-lgtm-2.png?id=c786f386-d9d7-48dd-a294-741960b3f41e&table=block&spaceId=e299bee0-fe31-4ded-b642-8a492100aed7&expirationTimestamp=1712858400000&signature=XEEMV8tKZXQXL3Y5EtyaxYFHZ1tuH9RNYCsDJ0fg64c&downloadName=arc-lgtm-2.png))
 
 ---
 
@@ -196,16 +196,6 @@ Para ambientes de teste ou desenvolvimento, recomenda-se utilizar as configuraç
     
 
 Após a remoção, o mesmo deverá ser removido do `helmfile.yaml`, para manter a consistência.
-
----
-
-## 🔧 Instalação OpenTelemetry collector
-
-Instação do OpenTelemetry collector basta aplicar o seguinte comando, a partir do diretório raiz:
-
-```bash
-kubectl apply -k ./kubernetes-otel-collector
-```
 
 ---
 
