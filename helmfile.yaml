@@ -1,0 +1,77 @@
+repositories:
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+
+  - name: prometheus-grafana
+    url: https://prometheus-community.github.io/helm-charts
+
+releases:
+  - name: grafana
+    namespace: lgtm
+    createNamespace: true
+    chart: grafana/grafana
+    values:
+      - ./grafana/values-grafana.yaml
+
+  - name: loki
+    namespace: lgtm
+    createNamespace: true
+    chart: grafana/loki-distributed
+    values:
+      - ./loki/values-loki.yaml
+    set:
+      - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
+        value: ""
+      - name: storageConfig.aws.s3
+        value: ""
+      - name: storageConfig.aws.region
+        value: us-east-1
+      - name: storageConfig.aws.bucketnames
+        value: eks-lgtm-loki-leoz
+
+  - name: mimir
+    namespace: lgtm
+    createNamespace: true
+    chart: grafana/mimir-distributed
+    values:
+      - ./mimir/values-mimir.yaml
+    set:
+      - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
+        value: ""
+      - name: structuredConfig.ruler_storage.s3.bucket_name
+        value: eks-lgtm-mimir-leoz
+      - name: structuredConfig.ruler_storage.s3.region
+        value: us-east-1
+      - name: structuredConfig.blocks_storage.s3.bucket_name
+        value: eks-lgtm-mimir-ruler-bucket-leoz
+      - name: structuredConfig.blocks_storage.s3.region
+        value: us-east-1
+
+
+  - name: prometheus
+    namespace: lgtm
+    createNamespace: true
+    chart: prometheus-community/kube-prometheus-stack
+    values:
+      - ./prometheus/values-prometheus.yaml
+
+  - name: promtail
+    namespace: lgtm
+    createNamespace: true
+    chart: grafana/promtail
+    values:
+      - ./promtail/values-promtail.yaml
+
+  - name: tempo
+    namespace: lgtm
+    createNamespace: true
+    chart: grafana/tempo-distributed
+    values:
+      - ./tempo/values-tempo.yaml
+    set:
+      - name: serviceAccount.annotations.eks\.amazonaws\.com\/role-arn
+        value: ""
+      - name: storage.trace.s3.bucket
+        value: eks-lgtm-tempo-leoz
+      - name: storage.admin.s3.bucket
+        value: ""
